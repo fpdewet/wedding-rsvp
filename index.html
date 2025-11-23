@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Francois and Alicia's Wedding - RSVP</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Hero: Invite PDF -->
+        <section class="hero">
+            <div class="pdf-viewer">
+                <canvas id="pdf-canvas"></canvas>
+            </div>
+            <button class="scroll-btn">RSVP Below</button>
+        </section>
+
+        <!-- Countdown -->
+        <section class="countdown">
+            <h2>Countdown to Forever</h2>
+            <div id="timer"></div>
+        </section>
+
+        <!-- Photo Gallery -->
+        <section class="gallery">
+            <h2>Some of our memories over the years</h2>
+            <div class="photo-grid" id="photo-grid"></div>
+        </section>
+
+        <!-- Lightbox with arrows -->
+        <div id="lightbox" class="lightbox hidden">
+            <span class="lightbox-close">×</span>
+            <img id="lightbox-img" src="" alt="Full size photo">
+            <div id="prev-arrow" class="lightbox-arrow">Left Arrow</div>
+            <div id="next-arrow" class="lightbox-arrow">Right Arrow</div>
+        </div>
+
+        <!-- FAQ - DRESS CODE FIXED -->
+        <section class="faq">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <h3>What is the dress code?</h3>
+                <p>Garden party chic – think flowy dresses and linen suits</p>
+            </div>
+            <div class="faq-item"><h3>Where should I park?</h3><p>Street parking available; arrive early.</p></div>
+            <div class="faq-item"><h3>Is the ceremony indoors or outdoors?</h3><p>Outdoors under the tented area.</p></div>
+            <div class="faq-item"><h3>What time should guests arrive?</h3><p>Guests are to arrive from 4:50 PM with ceremony to start 5:15 PM.</p></div>
+            <div class="faq-item"><h3>How do I get directions?</h3><p>The Birdhouse Venue is part of Chocolat Bistro. Your GPS should be able to direct if you search "Chocolat Bistro Durbanville".</p></div>
+            <div class="faq-item"><h3>Who to contact with questions?</h3><p>RSVP queries: fpdewet@yahoo.com or lili.engelbrecht@yahoo.com</p></div>
+            <div class="faq-item"><h3>What if it rains?</h3><p>Weather-proof setup; we'll update via text if needed.</p></div>
+            <div class="faq-item">
+                <h3>Can I bring a gift?</h3>
+                <p>Honeymoon contributions are appreciated but not expected.<br><br>
+                Contributions can be made to:<br>
+                <strong>Francois de Wet</strong><br>
+                FNB<br>
+                Cheque Account<br>
+                <strong>62889555771</strong></p>
+            </div>
+        </section>
+
+        <!-- RSVP Form -->
+        <section class="rsvp">
+            <h2>Will You Join Us?</h2>
+            <form id="rsvp-form">
+                <h3>Individual 1</h3>
+                <label for="ind1-name">Name:</label>
+                <input type="text" id="ind1-name" required>
+
+                <label for="ind1-main">Main (choose 1):</label>
+                <select id="ind1-main" required>
+                    <option value="">Select...</option>
+                    <option value="pork">Roast Pork Belly</option>
+                    <option value="chicken">Bacon Wrapped Chicken Roulade</option>
+                </select>
+
+                <label for="ind1-dessert">Dessert (choose 1):</label>
+                <select id="ind1-dessert" required>
+                    <option value="">Select...</option>
+                    <option value="ganache">Chocolate and Peanut Butter Ganache Tart</option>
+                    <option value="fondant">Fondant au Chocolat</option>
+                </select>
+                <div id="fondant1-option" class="hidden">
+                    <label>With:</label>
+                    <select id="fondant1-with">
+                        <option value="cream">With Cream</option>
+                        <option value="icecream">With Vanilla Pod Ice Cream</option>
+                    </select>
+                </div>
+
+                <h3>Individual 2 (if attending with partner)</h3>
+                <button type="button" id="na-btn">N/A (Just Individual 1)</button>
+                <div id="ind2-fields">
+                    <label for="ind2-name">Name:</label>
+                    <input type="text" id="ind2-name">
+
+                    <label for="ind2-main">Main (choose 1):</label>
+                    <select id="ind2-main">
+                        <option value="">Select...</option>
+                        <option value="pork">Roast Pork Belly</option>
+                        <option value="chicken">Bacon Wrapped Chicken Roulade</option>
+                    </select>
+
+                    <label for="ind2-dessert">Dessert (choose 1):</label>
+                    <select id="ind2-dessert">
+                        <option value="">Select...</option>
+                        <option value="ganache">Chocolate and Peanut Butter Ganache Tart</option>
+                        <option value="fondant">Fondant au Chocolat</option>
+                    </select>
+                    <div id="fondant2-option" class="hidden">
+                        <label>With:</label>
+                        <select id="fondant2-with">
+                            <option value="cream">With Cream</option>
+                            <option value="icecream">With Vanilla Pod Ice Cream</option>
+                        </select>
+                    </div>
+                </div>
+
+                <label>RSVP (for both):</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="rsvp" value="yes" required> Yes, with joy!</label>
+                    <label><input type="radio" name="rsvp" value="no"> No, sending love from afar</label>
+                </div>
+
+                <label for="dietary">Any dietary notes/allergies? (optional, for both)</label>
+                <textarea id="dietary" placeholder="E.g., gluten-free or nut allergy"></textarea>
+
+                <label for="song-request">Song Requests for the Evening:</label>
+                <input type="text" id="song-request" placeholder="E.g., 'Perfect' by Ed Sheeran">
+
+                <button type="submit">Send Our Way</button>
+            </form>
+
+            <div id="thank-you" class="hidden">
+                <p>Thank you! You have successfully RSVP'd for Francois and Alicia's Wedding.</p>
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
