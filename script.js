@@ -13,9 +13,9 @@ document.addEventListener('DOMContentLoaded', () => {
         img.loading = 'lazy';
         img.alt = `Photo ${i}`;
 
-        // ←←← THIS IS THE ONLY LINE CHANGED (added the 1)
+        // FIXED: GitHub has .jpeg1 files
         img.src = `photos/photo${i}.jpeg1`;
-        img.onerror = () => thumb.remove(); // removes broken thumbnails
+        img.onerror = () => thumb.remove();
 
         img.onclick = () => {
             currentIndex = allPhotos.indexOf(img.src);
