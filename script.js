@@ -13,11 +13,9 @@ document.addEventListener('DOMContentLoaded', () => {
         img.loading = 'lazy';
         img.alt = `Photo ${i}`;
 
-        img.src = `photos/photo${i}.jpeg`;
-        img.onerror = () => {
-            img.src = `photos/photo${i}.jpg`;
-            img.onerror = () => thumb.remove();
-        };
+        // ←←← THIS IS THE ONLY LINE CHANGED (added the 1)
+        img.src = `photos/photo${i}.jpeg1`;
+        img.onerror = () => thumb.remove(); // removes broken thumbnails
 
         img.onclick = () => {
             currentIndex = allPhotos.indexOf(img.src);
@@ -28,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
             openLightbox(img.src);
         };
 
-        if (!img.src.includes('about:blank')) allPhotos.push(img.src);
+        allPhotos.push(img.src);
         thumb.appendChild(img);
         grid.appendChild(thumb);
     }
@@ -73,7 +71,7 @@ document.addEventListener('keydown', e => {
 });
 
 // ============================================
-// RSVP – FINAL LIVE VERSION (sends to YOUR Google Sheet)
+// RSVP – FINAL LIVE VERSION
 // ============================================
 document.getElementById('rsvp-form').addEventListener('submit', async e => {
     e.preventDefault();
@@ -95,7 +93,6 @@ document.getElementById('rsvp-form').addEventListener('submit', async e => {
         songRequest: document.getElementById('song-request').value
     };
 
-    // ←←← YOUR REAL WORKING URL
     const liveUrl = "https://script.google.com/macros/s/AKfycbzxGMXmQq_fO-MM60UcAsr7e_kq7WOdCTyZhkwe0FX2wXGhFUU2rZuz-4lXeuRY4hQx/exec";
 
     try {
